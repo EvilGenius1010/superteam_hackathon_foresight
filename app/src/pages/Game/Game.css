@@ -1,0 +1,33 @@
+.game-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.chart-container {
+  width: 70%;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+.betting-container {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sol-input {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  font-size: 18px;
+}
+
+.bet-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width: 100%;
+}
