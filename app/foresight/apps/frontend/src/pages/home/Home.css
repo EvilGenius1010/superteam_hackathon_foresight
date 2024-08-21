@@ -1,4 +1,4 @@
-.home-container {
+/* .home-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,4 +13,9 @@
   font-size: 20px;
   cursor: pointer;
   margin-top: 20px;
+} */
+
+@font-face {
+  font-family: landingpgFont;
+  src: url("../../../Poppins-ExtraLight.ttf");
 }

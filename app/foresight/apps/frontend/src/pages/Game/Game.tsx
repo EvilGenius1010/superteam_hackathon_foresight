@@ -1,3 +1,9 @@
+
+// import {
+//   HoverCard,
+//   HoverCardContent,
+//   HoverCardTrigger,
+// } from "@/components/ui/hover-card"
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import { useCoinContext } from '../../context/CoinContext';
 import './Game.css';
@@ -40,6 +46,14 @@ const Game: React.FC = () => {
   console.log(solPrice)
   return (
     <div className="App">
+      {/* <HoverCard>
+  <HoverCardTrigger asChild>
+    </HoverCardTrigger>
+  <HoverCardContent>
+    The React Framework – created and maintained by @vercel.
+  </HoverCardContent>
+</HoverCard> */}
+      <Game2/>
       <header className="App-header">
         {!walletAddress ? (
           <button onClick={connectWallet}>Connect Wallet</button>
@@ -73,3 +87,51 @@ const Game: React.FC = () => {
 
 export default Game;
 
+//create a hover card and put,say graphs in it.
+
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+
+import { Input } from "@/components/ui/input"
+import { Button } from '@/components/ui/button';
+
+
+
+export function Game2(){
+return (
+
+    
+  <Card>
+  <CardHeader>
+    <CardTitle>Solana</CardTitle>
+  </CardHeader>
+  <CardContent>
+    <p>Odds :&nbsp;</p>
+    <div className='flex flex-row space-x-6 py-5'>
+
+  <button >
+    <img src= "../../BetUp.png" height={"40px"} width={"40px"} />
+    </button>
+    <button>
+  <img src= "../../BetDown.png" height={"40px"} width={"40px"} />
+    </button>
+    </div>
+    <div className='flex flex-col'>
+    <p>Enter bet amount in SOL below:</p>
+    <div className="flex w-full max-w-sm items-center space-x-2">
+      <Input type="number" placeholder="Enter Amount" min={0.000000001} />
+      <Button type="submit">Place Bet</Button>
+    </div>
+    </div>
+  </CardContent>
+  
+</Card>
+      
+
+
+)
+}
