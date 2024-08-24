@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import Home from './pages/Home/Home';
-import Game2 from './pages/Game/Game'
+import Game2 from './pages/Game/Game';
 
 
 
