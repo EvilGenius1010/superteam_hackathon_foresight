@@ -1,11 +1,10 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import './Home.css';
 import { Button } from "@/components/ui/button"
-
+import { Link } from 'react-router-dom';
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
+
 
   return (
     <div style={{fontFamily:"landingpgFont"}}>
@@ -17,7 +16,9 @@ const Home: React.FC = () => {
           <p className='pt-3'>win it big.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
         </div>
         <div className=' relative top-10'>
-          <Button  onClick={() => navigate("/game")} className='common-btn'>Place your bets</Button>
+          <Button>
+          <Link to="/game" className='common-btn'>Place your bets</Link>
+          </Button>
         </div>
       </div>
     </div>
