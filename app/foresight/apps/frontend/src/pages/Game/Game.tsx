@@ -105,7 +105,7 @@ export function Game2(){
 return (
 
     
-  <Card>
+  <Card style={{fontFamily:"landingpgFont"}}>
   <CardHeader>
     <CardTitle>Solana</CardTitle>
   </CardHeader>

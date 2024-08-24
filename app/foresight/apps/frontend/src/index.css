@@ -3,9 +3,7 @@
 @tailwind utilities;
 
 :root {
-  background-image: url("../../../BG.png");
-
-  
+  background-image: url("../BG.png"); 
 }
 
 @font-face {

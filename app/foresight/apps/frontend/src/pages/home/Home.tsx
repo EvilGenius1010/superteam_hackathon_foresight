@@ -8,7 +8,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='home-cont ' style={{fontFamily:"landingpgFont"}}>
+    <div style={{fontFamily:"landingpgFont"}}>
       <div className="home flex flex-col left-16 relative">
         <div className="text-6xl flex flex-col relative">
           <p className='py-3'>Use your intuition&nbsp;&nbsp;&nbsp;&nbsp;</p>
