@@ -101,7 +101,7 @@ import { Button } from '@/components/ui/button';
 
 
 
-export function Game2(){
+export default function Game2(){
 return (
 
     

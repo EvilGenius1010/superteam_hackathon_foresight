@@ -9,8 +9,8 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import Home from './pages/Home/Home.tsx';
-import {Game2} from './pages/Game/Game'
+import Home from './pages/Home/Home';
+import Game2 from './pages/Game/Game'
 
 
 
