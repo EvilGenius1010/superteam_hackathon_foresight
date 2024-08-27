@@ -4,88 +4,88 @@
 //   HoverCardContent,
 //   HoverCardTrigger,
 // } from "@/components/ui/hover-card"
-import React, { useState, ChangeEvent, useEffect } from 'react';
-import { useCoinContext } from '../../context/CoinContext';
-import './Game.css';
+// import React, { useState, ChangeEvent, useEffect } from 'react';
+// import { useCoinContext } from '../../context/CoinContext';
+// import './Game.css';
 
-const Game: React.FC = () => {
-  const { solPrice, fetchCall, setFetchCall} = useCoinContext();
-  const [walletAddress, setWalletAddress] = useState<string | null>(null);
-  const [amount, setAmount] = useState<number | ''>('');
-  const [prediction, setPrediction] = useState<boolean | null>(null);
+// const Game: React.FC = () => {
+//   const { solPrice, fetchCall, setFetchCall} = useCoinContext();
+//   const [walletAddress, setWalletAddress] = useState<string | null>(null);
+//   const [amount, setAmount] = useState<number | ''>('');
+//   const [prediction, setPrediction] = useState<boolean | null>(null);
 
-  const connectWallet = () => {
-    setWalletAddress('FakeWalletAddress123');
-  };
+//   const connectWallet = () => {
+//     setWalletAddress('FakeWalletAddress123');
+//   };
 
-  const handleBetAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setAmount(event.target.valueAsNumber || '');
-  };
+//   const handleBetAmountChange = (event: ChangeEvent<HTMLInputElement>) => {
+//     setAmount(event.target.valueAsNumber || '');
+//   };
 
-  const handlePredictionChange = (value: boolean) => {
-    setPrediction(value);
-  };
+//   const handlePredictionChange = (value: boolean) => {
+//     setPrediction(value);
+//   };
 
-  const placeBet = () => {
-    if (walletAddress && amount && prediction !== null) {
-      // Simulate placing a bet
-      console.log(`Placing bet of ${amount} SOL on ${prediction ? 'Up' : 'Down'}`);
-    } else {
-      console.error('Please fill all fields and connect your wallet.');
-    }
-  };
+//   const placeBet = () => {
+//     if (walletAddress && amount && prediction !== null) {
+//       // Simulate placing a bet
+//       console.log(`Placing bet of ${amount} SOL on ${prediction ? 'Up' : 'Down'}`);
+//     } else {
+//       console.error('Please fill all fields and connect your wallet.');
+//     }
+//   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFetchCall(prev => (prev !== null ? prev + 1 : 1)); // Increment fetchCall every 5 seconds
-    }, 15000);
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       setFetchCall(prev => (prev !== null ? prev + 1 : 1)); // Increment fetchCall every 5 seconds
+//     }, 15000);
 
-    return () => clearInterval(interval); // Clean up interval on unmount
-  }, [setFetchCall]);
+//     return () => clearInterval(interval); // Clean up interval on unmount
+//   }, [setFetchCall]);
 
-  console.log(solPrice)
-  return (
-    <div className="App">
-      {/* <HoverCard>
-  <HoverCardTrigger asChild>
-    </HoverCardTrigger>
-  <HoverCardContent>
-    The React Framework – created and maintained by @vercel.
-  </HoverCardContent>
-</HoverCard> */}
-      <Game2/>
-      <header className="App-header">
-        {!walletAddress ? (
-          <button onClick={connectWallet}>Connect Wallet</button>
-        ) : (
-          <>
-            <p>Wallet Address: {walletAddress}</p>
-            <div>
-              <label htmlFor="amount">Bet Amount (SOL): </label>
-              <input
-                type="number"
-                id="amount"
-                value={amount}
-                onChange={handleBetAmountChange}
-                min="0.1"
-                step="0.1"
-              />
-            </div>
-            <div>
-                <h1>Solana Price: {solPrice !== null ? `${solPrice} USD` : "Loading..."}</h1>
-                <p>Fetch Call Count: {fetchCall}</p>
-              <button onClick={() => handlePredictionChange(true)}>Bet Up</button>
-              <button onClick={() => handlePredictionChange(false)}>Bet Down</button>
-            </div>
-            <button onClick={placeBet} disabled={prediction === null}>Place Bet</button>
-          </>
-        )}
-      </header>
-    </div>
-  );
-};
+//   console.log(solPrice)
+//   return (
+//     <div className="App">
+//       {/* <HoverCard>
+//   <HoverCardTrigger asChild>
+//     </HoverCardTrigger>
+//   <HoverCardContent>
+//     The React Framework – created and maintained by @vercel.
+//   </HoverCardContent>
+// </HoverCard> */}
+//       <Game2/>
+//       <header className="App-header">
+//         {!walletAddress ? (
+//           <button onClick={connectWallet}>Connect Wallet</button>
+//         ) : (
+//           <>
+//             <p>Wallet Address: {walletAddress}</p>
+//             <div>
+//               <label htmlFor="amount">Bet Amount (SOL): </label>
+//               <input
+//                 type="number"
+//                 id="amount"
+//                 value={amount}
+//                 onChange={handleBetAmountChange}
+//                 min="0.1"
+//                 step="0.1"
+//               />
+//             </div>
+//             <div>
+//                 <h1>Solana Price: {solPrice !== null ? `${solPrice} USD` : "Loading..."}</h1>
+//                 <p>Fetch Call Count: {fetchCall}</p>
+//               <button onClick={() => handlePredictionChange(true)}>Bet Up</button>
+//               <button onClick={() => handlePredictionChange(false)}>Bet Down</button>
+//             </div>
+//             <button onClick={placeBet} disabled={prediction === null}>Place Bet</button>
+//           </>
+//         )}
+//       </header>
+//     </div>
+//   );
+// };
 
-export default Game;
+// export default Game;
 
 //create a hover card and put,say graphs in it.
 
@@ -98,40 +98,119 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Button } from '@/components/ui/button';
+import { useCoinContext } from '../../context/CoinContext';
+import { useEffect, useState } from 'react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { Connection, clusterApiUrl, PublicKey } from '@solana/web3.js';
 
 
-
-export function Game2(){
-return (
+// export function Game2(){
+// return (
 
     
-  <Card>
-  <CardHeader>
-    <CardTitle>Solana</CardTitle>
-  </CardHeader>
-  <CardContent>
-    <p>Odds :&nbsp;</p>
-    <div className='flex flex-row space-x-6 py-5'>
+//   <Card>
+//   <CardHeader>
+//     <CardTitle>Solana</CardTitle>
+//   </CardHeader>
+//   <CardContent>
+//     <p>Odds :&nbsp;</p>
+//     <div className='flex flex-row space-x-6 py-5'>
 
-  <button >
-    <img src= "../../BetUp.png" height={"40px"} width={"40px"} />
-    </button>
-    <button>
-  <img src= "../../BetDown.png" height={"40px"} width={"40px"} />
-    </button>
-    </div>
-    <div className='flex flex-col'>
-    <p>Enter bet amount in SOL below:</p>
-    <div className="flex w-full max-w-sm items-center space-x-2">
-      <Input type="number" placeholder="Enter Amount" min={0.000000001} />
-      <Button type="submit">Place Bet</Button>
-    </div>
-    </div>
-  </CardContent>
+//   <button >
+//     <img src= "../../BetUp.png" height={"40px"} width={"40px"} />
+//     </button>
+//     <button>
+//   <img src= "../../BetDown.png" height={"40px"} width={"40px"} />
+//     </button>
+//     </div>
+//     <div className='flex flex-col'>
+//     <p>Enter bet amount in SOL below:</p>
+//     <div className="flex w-full max-w-sm items-center space-x-2">
+//       <Input type="number" placeholder="Enter Amount" min={0.000000001} />
+//       <Button type="submit">Place Bet</Button>
+//     </div>
+//     </div>
+//   </CardContent>
   
-</Card>
+// </Card>
       
 
 
-)
+// )
+// }
+
+export function Game2() {
+  const { solPrice, setFetchCall } = useCoinContext();
+  const { publicKey } = useWallet();
+  const [balance, setBalance] = useState<number | null>(null);
+  const connection = new Connection(clusterApiUrl('devnet'));
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFetchCall(prev => (prev !== null ? prev + 1 : 1));
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [setFetchCall]);
+
+  useEffect(() => {
+    if (publicKey) {
+      const fetchBalance = async () => {
+        const walletBalance = await getWalletBalance(publicKey.toString());
+        setBalance(walletBalance);
+      };
+
+      fetchBalance();
+    }
+  }, [publicKey]);
+
+  const getWalletBalance = async (walletAddress: string) => {
+    try {
+      const publicKey = new PublicKey(walletAddress);
+      const balance = await connection.getBalance(publicKey);
+      return balance / 1e9; // Convert lamports to SOL
+    } catch (error) {
+      console.error('Error fetching balance:', error);
+      return null;
+    }
+  };
+
+  return (
+    <Card style={{ fontFamily: "landingpgFont" }}>
+      <CardHeader>
+        <CardTitle>Solana</CardTitle>
+        <h1>{solPrice !== null ? `${solPrice} USD` : "Loading..."}</h1>
+      </CardHeader>
+      <CardContent>
+        <div className="flex flex-col space-y-4">
+          <WalletMultiButton />
+          {publicKey && (
+            <>
+              <p>Wallet Address: {publicKey.toString()}</p>
+              {balance !== null && (
+                <p>Wallet Balance: {balance} SOL</p>
+              )}
+            </>
+          )}
+          <p>Odds:</p>
+          <div className='flex flex-row space-x-6 py-5'>
+            <button>
+              <img src="../../BetUp.png" height={"40px"} width={"40px"} />
+            </button>
+            <button>
+              <img src="../../BetDown.png" height={"40px"} width={"40px"} />
+            </button>
+          </div>
+          <div className='flex flex-col'>
+            <p>Enter bet amount in SOL below:</p>
+            <div className="flex w-full max-w-sm items-center space-x-2">
+              <Input type="number" placeholder="Enter Amount" min={0.000000001} />
+              <Button type="submit">Place Bet</Button>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
 }
