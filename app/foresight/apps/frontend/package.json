@@ -12,6 +12,8 @@
   "dependencies": {
     "@radix-ui/react-hover-card": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.0",
+    "@solana/wallet-adapter-react-ui": "^0.9.35",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
     "axios": "^1.7.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
